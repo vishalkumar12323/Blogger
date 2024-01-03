@@ -1,8 +1,10 @@
 import { config } from "dotenv";
 config();
 import express from "express";
-import bodyParser from "body-parser";
 import path from "path";
+import bodyParser from "body-parser";
+import { connectDB } from "./db/connection.js";
+import { router } from "./routes/user-router.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -18,11 +20,7 @@ app.get('/', (req, res) => {
     res.render("home");
 });
 
-app.get("/login", (req, res) => {
-    res.render("login");
-});
+app.use('/', router);
 
-app.get("/signin", (req, res) => {
-    res.render("signin");
-});
+// connectDB(process.env.CONNECTION_STRING).then(() => console.log('connect'));
 app.listen(port, () => console.log(`server up & running port:${port}`));
