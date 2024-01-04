@@ -4,8 +4,7 @@ import { setToken } from "../middlewares/token-services.js";
 
 const router = Router();
 router.get('/', (req, res) => {
-    // console.log('user ', req.user);
-    res.render("home");
+    res.render("home", { user: req.user });
 });
 router
     .route("/signin")
@@ -53,4 +52,9 @@ router
         }
     });
 
+
+router.route("/logout").get((req, res) => {
+    res.clearCookie('token');
+    return res.redirect("/");
+});
 export { router };

@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const setToken = (user) => {
+    console.log(user, 'user');
     const payload = {
         id: user._id,
         name: user.name,
@@ -9,13 +10,13 @@ const setToken = (user) => {
     }
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' });
 
-    return token
+    return token;
 }
 
 const getToken = (token) => {
     if (!token) return null;
     try {
-        jwt.verify(token, process.env.SECRET);
+        return jwt.verify(token, process.env.SECRET);
     } catch (e) {
         return null;
     }

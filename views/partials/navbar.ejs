@@ -25,9 +25,15 @@
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
         <li
-          class="nav-item d-flex justify-content-center align-item-center mx-2"
+          class="nav-item d-flex justify-content-center align-item-center mx-2 mt-1"
+          style="width: 38px; height: 38px"
         >
-          <img src="/assets/user-profile.svg" alt="user-profile-img" />
+          <img
+            src="<%= locals.user ? user.userProfile : '/assets/Polish_20230625_180336394.jpg' %>"
+            class="img-fluid"
+            style="border-radius: 50%"
+            alt="user-profile-img"
+          />
         </li>
 
         <% if (locals.user) { %>
@@ -40,7 +46,7 @@
             --bs-btn-font-size: 0.95rem;
           "
         >
-          <a class="nav-link text-white" href="#">Logout</a>
+          <a class="nav-link text-white" href="/logout">Logout</a>
         </button>
         <% } else {%>
         <button
