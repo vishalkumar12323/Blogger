@@ -1,8 +1,8 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Blogger</a>
+    <a class="navbar-brand text-white" href="/">Blogger</a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler text-white bg-white"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarSupportedContent"
@@ -15,10 +15,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active text-white" aria-current="page" href="/"
+            >Home</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/create-new">Add Blog</a>
+          <a class="nav-link text-white" href="/blog/new-blog">Create Blog</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
@@ -38,7 +40,7 @@
             --bs-btn-font-size: 0.95rem;
           "
         >
-          <a class="nav-link" href="#">Logout</a>
+          <a class="nav-link text-white" href="#">Logout</a>
         </button>
         <% } else {%>
         <button
@@ -50,7 +52,7 @@
             --bs-btn-font-size: 0.95rem;
           "
         >
-          <a class="nav-link" href="/signin">Create Account</a>
+          <a class="nav-link text-white" href="/signin">Create Account</a>
         </button>
         <button
           type="button"
@@ -61,7 +63,7 @@
             --bs-btn-font-size: 0.95rem;
           "
         >
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link text-white" href="/login">Login</a>
         </button>
         <% } %>
       </ul>

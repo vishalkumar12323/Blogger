@@ -5,6 +5,8 @@ import path from "path";
 import bodyParser from "body-parser";
 import { connectDB } from "./db/connection.js";
 import { router } from "./routes/user-router.js";
+import { blogRouter } from "./routes/blog-router.js";
+import { authentication } from "./middlewares/validate-user.js";
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -21,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/', router);
+app.use("/blog", authentication, blogRouter);
 
-// connectDB(process.env.CONNECTION_STRING).then(() => console.log('connect'));
-app.listen(port, () => console.log(`server up & running port:${port}`));
+connectDB(process.env.CONNECTION_STRING).then(() => console.log('connect'));
+app.listen(port, () => console.log(`server running on port:${port}`));

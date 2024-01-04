@@ -1,0 +1,25 @@
+@media (min-width: 768px) {
+    .box {
+        width: fit-content !important;
+    }
+}
+
+@media (min-width: 992px) {
+
+    .box {
+        width: 70vw !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .box {
+        width: 60vw;
+    }
+}
+
+@media (min-width: 1400px) {
+    .box {
+        max-width: 90vw !important;
+    }
+
+}
