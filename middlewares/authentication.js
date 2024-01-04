@@ -1,10 +1,12 @@
 import { getToken } from "./token-services.js"
 
 const authentication = async (req, res, next) => {
-    const token = req.cookies["token"];
+    console.log(req);
+    const { token } = req.cookies;
     if (!token) return res.redirect("/login");
     try {
         const user = getToken(token);
+        // console.log(user);
         req.user = user;
         next();
     } catch (e) {
@@ -14,8 +16,9 @@ const authentication = async (req, res, next) => {
 }
 
 const checkUserAuth = (req, res, next) => {
-    const token = req.cookies["token"];
+    const { token } = req.cookies;
     const user = getToken(token);
+    // console.log('user ', user);
     req.user = user;
     next();
 }

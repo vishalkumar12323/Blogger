@@ -3,7 +3,10 @@ import { User } from "../models/userSchema.js";
 import { setToken } from "../middlewares/token-services.js";
 
 const router = Router();
-
+router.get('/', (req, res) => {
+    // console.log('user ', req.user);
+    res.render("home");
+});
 router
     .route("/signin")
     .get((req, res) => {
@@ -14,6 +17,11 @@ router
         if (!user) return res.redirect("/signin");
         try {
             const createdUser = await User.create(user);
+            if (createdUser) {
+                const token = setToken(createdUser);
+                res.cookie('token', token);
+                res.redirect("/");
+            }
             return res.redirect('/');
         } catch (e) {
             console.log('e ', e);
@@ -41,7 +49,7 @@ router
             }
         } catch (e) {
             console.log('login error', e);
-            res.redirect("login");
+            res.redirect("/login");
         }
     });
 
