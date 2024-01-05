@@ -1,6 +1,19 @@
 import { Router } from "express";
+import multer from "multer";
 import { User } from "../models/userSchema.js";
 import { setToken } from "../middlewares/token-services.js";
+
+
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         return cb(null, './uploads')
+//     },
+//     filename: function (req, file, cb) {
+//         return cb(null, `${Date.now()}-${file.originalname}`);
+//     }
+// });
+
+// const upload = multer({ storage: storage });
 
 const router = Router();
 router.get('/', (req, res) => {
@@ -13,9 +26,14 @@ router
     })
     .post(async (req, res) => {
         const user = req.body;
+        console.log(user);
         if (!user) return res.redirect("/signin");
         try {
-            const createdUser = await User.create(user);
+            const createdUser = await User.create({
+                name: user.name,
+                email: user.email,
+                password: user.password,
+            });
             if (createdUser) {
                 const token = setToken(createdUser);
                 res.cookie('token', token);

@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     userProfileImageURL: {
         type: String,
-        default: '/assets/user-profile.svg'
+        default: '/uploads/user-profile.svg'
     }
 }, { timestamps: true });
 

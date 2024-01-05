@@ -1,6 +1,17 @@
 <%- include('./partials/header') %> <%- include('./partials/navbar') %>
 <div class="container mt-5 border p-3 rounded shadow">
-  <form action="/signin" method="post">
+  <form action="/signin" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="formFile" class="form-label">Choose Photo</label>
+      <input
+        type="file"
+        class="form-control"
+        name="profileImage"
+        id="formFile"
+        aria-label="file example"
+        required
+      />
+    </div>
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input
