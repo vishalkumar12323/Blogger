@@ -1,14 +1,14 @@
 import { Router } from "express";
 import multer from "multer";
 import path from "path";
-import fs from "fs";
 import { User } from "../models/userSchema.js";
+import { Blog } from "../models/blogSchema.js"
 import { setToken } from "../middlewares/token-services.js";
 
-
+// handle user-profile images(multer).
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        return cb(null, path.resolve('./public/uploads/'));
+        return cb(null, path.resolve('./public/uploads/users/'));
     },
     filename: function (req, file, cb) {
         const fileName = `${Date.now()}-${file.originalname}`
@@ -19,9 +19,14 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 const router = Router();
-router.get('/', (req, res) => {
-    res.render("home", { user: req.user });
+
+// home page route
+router.get('/', async (req, res) => {
+    const blogs = await Blog.find({ id: req.user?._id });
+    res.render("home", { user: req.user, blogs: blogs });
 });
+
+// signin page route
 router
     .route("/signin")
     .get((req, res) => {
@@ -35,7 +40,7 @@ router
                 name: user.name,
                 email: user.email,
                 password: user.password,
-                userProfileImageURL: `/uploads/${req.file.filename}`,
+                userProfileImageURL: `/uploads/users/${req.file.filename}`,
             });
             if (createdUser) {
                 const token = setToken(createdUser);
@@ -49,7 +54,7 @@ router
     });
 
 
-
+// login page route
 router
     .route("/login")
     .get((req, res) => {
@@ -73,6 +78,7 @@ router
     });
 
 
+// logout page route
 router.route("/logout").get((req, res) => {
     res.clearCookie('token');
     return res.redirect("/");

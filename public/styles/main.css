@@ -1,35 +1,24 @@
+.flex_column {
+    flex-direction: column !important;
+}
+
 @media (min-width: 768px) {
-    body {
-        background-color: rgb(153, 241, 93);
-    }
-
-    .box {
-        width: fit-content !important;
-    }
-
-    .blog {
+    .flex_column {
         flex-direction: row !important;
     }
 }
 
 @media (min-width: 992px) {
-    body {
-        background-color: rgb(148, 66, 66);
+    .nav-heading {
+        margin-left: 8px;
     }
+
 }
 
-@media (min-width: 1200px) {
-    body {
-        background-color: rgb(83, 235, 109);
-    }
-}
+@media (min-width: 1200px) {}
 
 @media (min-width: 1400px) {
-    body {
-        background-color: rgb(115, 158, 214);
-    }
-
-    .box {
-        max-width: 90vw !important;
+    .nav {
+        max-width: 1366px !important;
     }
 }

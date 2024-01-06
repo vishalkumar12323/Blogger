@@ -1,10 +1,6 @@
 import { Schema, model } from "mongoose";
 
 const blogSchema = new Schema({
-    blogThumbnail: {
-        type: String,
-        default: '/assets/javascript.jpg'
-    },
     title: {
         type: String,
         required: true,
@@ -12,6 +8,10 @@ const blogSchema = new Schema({
     content: {
         type: String,
         required: true
+    },
+    coverImage: {
+        type: String,
+        default: '/assets/javascript.jpg'
     },
     createdBy: {
         type: Schema.Types.ObjectId,
