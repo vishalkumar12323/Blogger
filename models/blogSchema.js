@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const blogSchema = new Schema({
     blogThumbnail: {
         type: String,
-        default: '/assets/download.jpg'
+        default: '/assets/javascript.jpg'
     },
     title: {
         type: String,
@@ -12,6 +12,10 @@ const blogSchema = new Schema({
     content: {
         type: String,
         required: true
+    },
+    createdBy: {
+        type: Schema.Types.ObjectId,
+        ref: 'users'
     }
 }, { timestamps: true });
 

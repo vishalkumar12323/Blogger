@@ -19,7 +19,6 @@ app.set('ejs', path.resolve("./views"));
 
 // setting middleware
 app.use(express.static("public"));
-app.use(express.static(path.resolve("./node_modules/bootstrap/")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 

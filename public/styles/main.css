@@ -1,25 +1,35 @@
 @media (min-width: 768px) {
+    body {
+        background-color: rgb(153, 241, 93);
+    }
+
     .box {
         width: fit-content !important;
+    }
+
+    .blog {
+        flex-direction: row !important;
     }
 }
 
 @media (min-width: 992px) {
-
-    .box {
-        width: 70vw !important;
+    body {
+        background-color: rgb(148, 66, 66);
     }
 }
 
 @media (min-width: 1200px) {
-    .box {
-        width: 60vw;
+    body {
+        background-color: rgb(83, 235, 109);
     }
 }
 
 @media (min-width: 1400px) {
+    body {
+        background-color: rgb(115, 158, 214);
+    }
+
     .box {
         max-width: 90vw !important;
     }
-
 }

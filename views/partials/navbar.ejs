@@ -22,6 +22,25 @@
         <li class="nav-item">
           <a class="nav-link text-white" href="/blog/new-blog">Create Blog</a>
         </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle text-white"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <%= locals.user ? user.name : 'Guest' %>
+          </a>
+          <ul class="dropdown-menu">
+            <% if (locals.user) { %>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <% } else {%>
+            <li><a class="dropdown-item" href="/signin">Create Account</a></li>
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+            <% } %>
+          </ul>
+        </li>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
         <li
@@ -29,49 +48,12 @@
           style="width: 38px; height: 38px"
         >
           <img
-            src="<%= locals.user ? user.userProfile : '/assets/Polish_20230625_180336394.jpg' %>"
+            src="<%= locals.user ? user.userProfile : '/assets/user-profile.svg' %>"
             class="img-fluid"
             style="border-radius: 50%"
             alt="user-profile-img"
           />
         </li>
-
-        <% if (locals.user) { %>
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          style="
-            --bs-btn-padding-y: 0.05rem;
-            --bs-btn-padding-x: 0.5rem;
-            --bs-btn-font-size: 0.95rem;
-          "
-        >
-          <a class="nav-link text-white" href="/logout">Logout</a>
-        </button>
-        <% } else {%>
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          style="
-            --bs-btn-padding-y: 0.05rem;
-            --bs-btn-padding-x: 0.5rem;
-            --bs-btn-font-size: 0.95rem;
-          "
-        >
-          <a class="nav-link text-white" href="/signin">Create Account</a>
-        </button>
-        <button
-          type="button"
-          class="btn btn-outline-primary"
-          style="
-            --bs-btn-padding-y: 0.05rem;
-            --bs-btn-padding-x: 0.5rem;
-            --bs-btn-font-size: 0.95rem;
-          "
-        >
-          <a class="nav-link text-white" href="/login">Login</a>
-        </button>
-        <% } %>
       </ul>
     </div>
   </div>
