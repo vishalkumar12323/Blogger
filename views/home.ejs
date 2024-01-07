@@ -1,13 +1,13 @@
 <%- include('./partials/header') %> <%- include('./partials/navbar') %>
 <div class="container mt-5">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    <% if (locals.user) { %> <% locals.blogs.forEach(blog => { %>
+    <% if (locals.user) { %> <% blogs.forEach(blog => { %>
     <div class="col">
       <div class="card shadow-sm">
         <img src="<%= blog.coverImage %>" alt="blog images" />
         <div class="card-body">
           <p class="card-title"><%= blog.title %></p>
-          <p class="card-text"><%= blog.content %></p>
+          <pre class="card-text"><%= blog.content.slice(0, 50) %></pre>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-outline-primary">
@@ -52,7 +52,7 @@
     <% } %>
   </div>
 </div>
-<!-- <h1></h1> -->
+
 <!-- <div class="blog container mt-5 d-flex gap-4 flex-column">
   <div class="col-md-6">
     <div

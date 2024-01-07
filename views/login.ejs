@@ -1,5 +1,87 @@
 <%- include('./partials/header') %> <%- include('./partials/navbar') %>
-<div class="container mt-5 border p-3 rounded shadow">
+
+<div class="container mt-5">
+  <div
+    class="d-flex flex-center align-items-center flex-column flex-column-fluid pb-5"
+  >
+    <a href="#" class="mb-4">
+      <img alt="Logo" src="/assets/blogger.png" class="img-fluid" width="50" />
+    </a>
+    <div class="signin-container bg-white rounded shadow px-3 py-3 mx-auto">
+      <form
+        class="form w-100"
+        novalidate=""
+        id="kt_login_signin_form"
+        action="/login"
+        method="post"
+      >
+        <div class="text-center mb-5">
+          <h1 class="text-dark mb-3">Sign In to Blogger</h1>
+          <div class="text-gray-400 fw-bold fs-4">
+            New Here?
+            <a class="link-primary" href="/signin">Create an Account</a>
+          </div>
+        </div>
+        <div class="fv-row mb-4">
+          <label class="form-label fs-6 fw-bolder text-dark">Email</label
+          ><input
+            placeholder="Email"
+            name="email"
+            class="form-control form-control-lg form-control-solid"
+            type="email"
+            autocomplete="off"
+            value="admin@demo.com"
+          />
+        </div>
+        <div class="fv-row mb-4">
+          <div class="d-flex justify-content-between mt-n5">
+            <div class="d-flex flex-stack mb-2">
+              <label class="form-label fw-bolder text-dark fs-6 mb-0"
+                >Password</label
+              >
+            </div>
+          </div>
+          <input
+            type="password"
+            autocomplete="off"
+            name="password"
+            class="form-control form-control-lg form-control-solid"
+          />
+        </div>
+        <div class="text-center">
+          <button
+            type="submit"
+            id="kt_sign_in_submit"
+            class="btn btn-lg btn-primary w-100 mb-3"
+          >
+            <span class="indicator-label">Continue</span>
+          </button>
+          <div class="text-center text-muted text-uppercase fw-bolder mb-3">
+            or
+          </div>
+          <a
+            href="#"
+            class="btn btn-flex flex-center btn-light btn-lg w-100 mb-3"
+            ><img
+              alt="Logo"
+              src="/assets/google.svg"
+              class="h-20px me-3"
+            />Continue with Google</a
+          ><a
+            href="#"
+            class="btn btn-flex flex-center btn-light btn-lg w-100 mb-3"
+            ><img
+              alt="Logo"
+              src="/assets/facebook.svg"
+              class="h-20px me-3"
+            />Continue with Facebook</a
+          >
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- <div class="container mt-5 border p-3 rounded shadow">
   <form action="/login" method="post">
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
@@ -24,5 +106,5 @@
     </div>
     <button type="submit" class="btn btn-outline-primary">Login</button>
   </form>
-</div>
+</div> -->
 <%- include('./partials/footer') %>
