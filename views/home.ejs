@@ -12,7 +12,7 @@
           <p class="card-text"><%= blog.content.slice(0, 60) %></p>
           <div class="btn-group">
             <button type="button" class="btn btn-sm btn-outline-primary">
-              <a href="/blog/view/<%= blog._id %>" class="nav-link"
+              <a href="/blog/<%= blog._id %>" class="nav-link"
                 >Continue reading...</a
               >
             </button>
@@ -102,33 +102,5 @@
     </div>
   </div>
 </div> -->
-<!-- <div class="card mx-auto mt-4 shadow box">
-  <div>
-    <img
-      src="/assets/javascript.jpg"
-      class="card-img-top img-fluid"
-      alt="..."
-    />
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </p>
-    <p class="fs-5">Created By: <span>John Dou</span></p>
-    <div class="mt-2">
-      <button class="btn btn-primary">
-        <a class="text-white text-decoration-none" href="/blog/edit"
-          >Edit Blog</a
-        >
-      </button>
-      <button class="btn btn-danger text-white">
-        <a class="text-white text-decoration-none" href="/blog/delete"
-          >Delete Blog</a
-        >
-      </button>
-    </div>
-  </div>
-</div> -->
+
 <%- include('./partials/footer') %>

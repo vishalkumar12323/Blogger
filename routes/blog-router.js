@@ -14,9 +14,6 @@ const uploads = multer({ storage: storage1 });
 blogRouter.route("/new-blog").get(blogPage).post(uploads.single('coverImage'), createBlog);
 
 blogRouter.route("/edit").get(editBlog).post(updateBlogPage);
-blogRouter.route('/blog/view/:id').get((req, res) => {
-    const id = req.params.id;
-    console.log(id);
-})
+blogRouter.route('/:id').get(viewBlog)
 
 export { blogRouter };

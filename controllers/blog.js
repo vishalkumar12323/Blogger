@@ -15,6 +15,7 @@ const createBlog = async (req, res) => {
             title: blog.title,
             content: blog.content,
             coverImage: `/uploads/blog-img/${req.file.filename}`,
+            createdBy: req.user.id,
         });
         await newBlog.save();
         return res.redirect("/");
@@ -29,10 +30,9 @@ const updateBlogPage = async (req, res) => {
 };
 
 const viewBlog = async (req, res) => {
-    console.log('req', req);
-    const id = Number(req.params.id);
-    res.status(200).json({ id: id });
-    res.render(`/blog/view/${id}`);
+    const id = req.params.id;
+    const blog = await Blog.find({ createdBy: req.user.id, _id: id });
+    res.render('view.ejs', { user: req.user, blog: blog });
 }
 
 export { blogPage, createBlog, editBlog, updateBlogPage, viewBlog }
