@@ -1,46 +1,22 @@
 import { Router } from "express";
 import multer from "multer";
-import path from "path";
-import { Blog } from "../models/blogSchema.js";
+import { storage1 } from "../services/file-handle.js";
+import {
+    blogPage, createBlog,
+    editBlog, updateBlogPage,
+    viewBlog
+} from "../controllers/blog.js"
 const blogRouter = Router();
 
-// handle blog-cover images.
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        return cb(null, path.resolve('./public/uploads/blog-img/'));
-    },
-    filename: (req, file, cb) => {
-        return cb(null, `${Date.now()}-${file.originalname}`)
-    }
-});
 
-const uploads = multer({ storage: storage });
+const uploads = multer({ storage: storage1 });
 
+blogRouter.route("/new-blog").get(blogPage).post(uploads.single('coverImage'), createBlog);
 
-
-blogRouter.route("/new-blog").get((req, res) => {
-    res.render("new-blog");
-}).post(uploads.single('coverImage'), async (req, res) => {
-    const blog = req.body;
-    if (!blog) return res.redirect("/new-blog");
-    try {
-        const newBlog = await new Blog({
-            title: blog.title,
-            content: blog.content,
-            coverImage: `/uploads/blog-img/${req.file.filename}`,
-        });
-        await newBlog.save();
-        return res.redirect("/");
-    } catch (e) {
-        console.log('blog error', e);
-        return res.redirect("/blog/new-blog");
-    }
-});
-
-blogRouter.route("/edit").get((req, res) => {
-    res.render("edit");
-}).post(async (req, res) => {
-
-});
+blogRouter.route("/edit").get(editBlog).post(updateBlogPage);
+blogRouter.route('/blog/view/:id').get((req, res) => {
+    const id = req.params.id;
+    console.log(id);
+})
 
 export { blogRouter };

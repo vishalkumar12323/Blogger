@@ -7,7 +7,7 @@ const setToken = (user) => {
         email: user.email,
         userProfile: user.userProfileImageURL
     }
-    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' });
+    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '5h' });
 
     return token;
 }

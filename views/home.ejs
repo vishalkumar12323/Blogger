@@ -4,19 +4,18 @@
     <% if (locals.user) { %> <% blogs.forEach(blog => { %>
     <div class="col">
       <div class="card shadow-sm">
-        <img src="<%= blog.coverImage %>" alt="blog images" />
+        <img src="<%= blog.coverImage %>" alt="blog images" class="img-fluid" />
         <div class="card-body">
-          <p class="card-title"><%= blog.title %></p>
-          <pre class="card-text"><%= blog.content.slice(0, 50) %></pre>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="btn-group">
-              <button type="button" class="btn btn-sm btn-outline-primary">
-                Continue reading..
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-primary">
-                Delete
-              </button>
-            </div>
+          <p class="card-title fs-5 fw-bold">
+            <%= blog.title.slice(0, 45) %>...
+          </p>
+          <p class="card-text"><%= blog.content.slice(0, 60) %></p>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-primary">
+              <a href="/blog/view/<%= blog._id %>" class="nav-link"
+                >Continue reading...</a
+              >
+            </button>
           </div>
         </div>
       </div>
@@ -38,13 +37,13 @@
             class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
             type="button"
           >
-            <a href="/signin" class="nav-link">Create Account</a>
+            <a href="/user/signin" class="nav-link">Create Account</a>
           </button>
           <button
             class="btn btn-outline-secondary btn-lg px-4 rounded-pill"
             type="button"
           >
-            <a href="/login" class="nav-link">Login Instead</a>
+            <a href="/user/login" class="nav-link">Login Instead</a>
           </button>
         </div>
       </div>

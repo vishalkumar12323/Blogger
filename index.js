@@ -2,8 +2,9 @@ import { config } from "dotenv";
 config();
 import path from "path";
 import express from "express";
-import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import { Home } from "./controllers/home.js";
 import { connectDB } from "./db/connection.js";
 import { router } from "./routes/user-router.js";
 import { blogRouter } from "./routes/blog-router.js";
@@ -23,7 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // setting application routes.
-app.use('/', checkUserAuth, router);
+app.get('/', checkUserAuth, Home)
+app.use('/user', router);
 app.use("/blog", authentication, blogRouter);
 
 
