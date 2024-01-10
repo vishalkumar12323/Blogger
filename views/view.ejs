@@ -3,29 +3,49 @@
   <div class="card mx-auto shadow box">
     <div>
       <img
-        src="<%= blog[0].coverImage %>"
+        src="<%= blog[0]?.coverImage %>"
         class="card-img-top img-fluid"
         alt="blogger"
       />
     </div>
     <div class="card-body">
-      <h5 class="card-title"><%= blog[0].title %></h5>
-      <p class="card-text"><%= blog[0].content%></p>
+      <h5 class="card-title"><%= blog[0]?.title %></h5>
+      <p class="card-text"><%= blog[0]?.content%></p>
       <p class="fs-5">Auther: <span><%= user.name %></span></p>
+      <% if (user.id || user.name) { %>
       <div class="mt-2">
         <button class="btn btn-primary">
           <a
             class="text-white text-decoration-none"
-            href="/blog/edit/<%= blog[0]._id %>"
+            href="/blog/edit/<%= blog[0]?._id %>"
             >Edit Blog</a
           >
         </button>
         <button class="btn btn-danger text-white">
-          <a class="text-white text-decoration-none" href="/blog/delete"
+          <a
+            class="text-white text-decoration-none"
+            href="/blog/delete/<%= blog[0]?._id %>"
             >Delete Blog</a
           >
         </button>
       </div>
+      <% } %>
+      <!-- <div class="mt-2">
+        <button class="btn btn-primary">
+          <a
+            class="text-white text-decoration-none"
+            href="/blog/edit/<%= blog[0]?._id %>"
+            >Edit Blog</a
+          >
+        </button>
+        <button class="btn btn-danger text-white">
+          <a
+            class="text-white text-decoration-none"
+            href="/blog/delete/<%= blog[0]?._id %>"
+            >Delete Blog</a
+          >
+        </button>
+      </div> -->
     </div>
   </div>
 </div>

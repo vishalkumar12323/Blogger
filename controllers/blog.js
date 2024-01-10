@@ -1,9 +1,20 @@
 import { Blog } from "../models/blogSchema.js";
+import { User } from "../models/userSchema.js";
 
 const blogPage = (req, res) => {
     res.render("new-blog");
 }
 
+const userBlog = async (req, res) => {
+    const id = req.user.id;
+    try {
+        const current_user = await User.findById({ _id: id });
+        const blog = await Blog.find({ createdBy: req.user.id });
+        res.render('user-blog', { user: current_user, blogs: blog });
+    } catch (e) {
+        console.log('user-blog error', e);
+    }
+}
 const editBlog = (req, res) => {
     const id = req.params.id;
     res.render('edit', { id: id });
@@ -30,8 +41,10 @@ const createBlog = async (req, res) => {
 
 const viewBlog = async (req, res) => {
     const id = req.params.id;
-    const blog = await Blog.find({ createdBy: req.user.id, _id: id });
-    res.render('view.ejs', { user: req.user, blog: blog });
+    const userId = req.user.id;
+    const current_user = await User.findById({ _id: userId });
+    const blog = await Blog.find();
+    res.render('view.ejs', { user: current_user, blog: blog });
 }
 
 const updateBlog = async (req, res) => {
@@ -51,4 +64,11 @@ const updateBlog = async (req, res) => {
     }
 }
 
-export { blogPage, createBlog, editBlog, viewBlog, updateBlog };
+const deleteBlog = async (req, res) => {
+    const id = req.params.id;
+    console.log(id);
+    await Blog.deleteOne({ _id: id });
+    res.redirect('/');
+}
+
+export { blogPage, createBlog, editBlog, viewBlog, updateBlog, deleteBlog, userBlog };
