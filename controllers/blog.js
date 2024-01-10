@@ -4,7 +4,6 @@ import { User } from "../models/userSchema.js";
 const blogPage = (req, res) => {
     res.render("new-blog");
 }
-
 const userBlog = async (req, res) => {
     const id = req.user.id;
     try {
