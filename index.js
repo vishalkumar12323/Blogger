@@ -24,11 +24,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // setting application routes.
+// Home Routes
 app.get('/', checkUserAuth, Home)
+// User Routes
 app.use('/user', router);
+// Blog Routes
 app.use("/blog", authentication, blogRouter);
 
 
 // connecting mongodb.
-connectDB(process.env.CONNECTION_STRING).then(() => console.log('connect'));
+connectDB(process.env.LOCAL_URL).then(() => console.log('connect'));
 app.listen(port, () => console.log(`server running on port:${port}`));
