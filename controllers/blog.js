@@ -36,6 +36,7 @@ const viewBlog = async (req, res) => {
 
 const updateBlog = async (req, res) => {
     const id = req.params.id;
+    console.log(id);
     const { title, content, coverImage } = req.body;
     const blog = await Blog.find({ createdBy: req.user.id, _id: id })
     if (!blog) return res.redirect('/new-blog');
@@ -43,8 +44,7 @@ const updateBlog = async (req, res) => {
         if (title) blog[0].title = title;
         if (content) blog[0].content = content;
         if (coverImage) blog[0].coverImage = `/uploads/blog-img/${req.file?.filename}`;
-
-        await Blog.findOneAndUpdate({ createdBy: req.user.id, id }, blog);
+        await Blog.findOneAndUpdate({ createdBy: req.user.id, _id: id }, blog);
         res.redirect('/');
     } catch (e) {
         console.log('update blog', e);
