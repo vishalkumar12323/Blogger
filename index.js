@@ -1,6 +1,6 @@
 import { config } from "dotenv"
 config();
-import { session, passport, express, bodyParser, path, cookieParser, Home, connectDB, router, blogRouter } from "./import/import.js"
+import { session, passport, express, bodyParser, path, cookieParser, connectDB, router, blogRouter } from "./import/import.js"
 import { auth2_O } from "./services/auth2.0.js"
 
 // setting express app.
@@ -36,10 +36,11 @@ app.get('/auth/google/user-blog',
     function (req, res) {
         // Successful authentication, redirect home.
         res.redirect('/');
-    });
-app.get('/', Home)
+    }
+);
+
 // User Routes
-app.use('/user', router);
+app.use('/', router);
 // Blog Routes
 app.use("/blog", blogRouter);
 

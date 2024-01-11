@@ -1,7 +1,7 @@
 <%- include('./partials/header') %> <%- include('./partials/navbar') %>
 <div class="container mt-5">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    <% if (locals.user) { %> <% blogs.forEach(blog => { %>
+    <% if (locals.user) { %> <% locals.blogs.forEach(blog => { %>
     <div class="col">
       <div class="card shadow-sm">
         <img src="<%= blog.coverImage %>" alt="blog images" class="img-fluid" />
@@ -37,13 +37,13 @@
             class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill"
             type="button"
           >
-            <a href="/user/signin" class="nav-link">Create Account</a>
+            <a href="/signup" class="nav-link">Create Account</a>
           </button>
           <button
             class="btn btn-outline-secondary btn-lg px-4 rounded-pill"
             type="button"
           >
-            <a href="/user/login" class="nav-link">Login Instead</a>
+            <a href="/login" class="nav-link">Login Instead</a>
           </button>
         </div>
       </div>

@@ -1,8 +1,8 @@
-import { mongoose, bcrypt, findOrCreate } from "../import/import.js";
+import { mongoose, findOrCreate } from "../import/import.js";
 import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
     },
     email: {
