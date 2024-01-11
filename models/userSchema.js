@@ -1,23 +1,23 @@
-import { mongoose, bcrypt } from "../import/import.js";
-import bcrypt from "bcrypt";
+import { mongoose, bcrypt, findOrCreate } from "../import/import.js";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
     },
     email: {
         type: String,
-        required: true,
         unique: true,
     },
     password: {
         type: String,
-        required: true,
     },
     userProfileImageURL: {
         type: String,
         default: '/uploads/user-profile.svg'
+    },
+    googleId: {
+        type: String,
     }
 }, { timestamps: true });
 
@@ -43,6 +43,8 @@ userSchema.methods.checkPassword = async function (password, next) {
         next(e);
     }
 }
+userSchema.plugin(passportLocalMongoose)
+userSchema.plugin(findOrCreate);
 const User = new mongoose.model('user', userSchema);
 
 export { User };

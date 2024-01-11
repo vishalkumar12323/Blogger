@@ -14,7 +14,7 @@ const blogSchema = new mongoose.Schema({
         default: '/assets/javascript.jpg'
     },
     createdBy: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'users'
     }
 }, { timestamps: true });

@@ -1,4 +1,6 @@
-import { express, multer, blogPage, createBlog, userBlog, viewBlog, editBlog, updateBlog, deleteBlog, storage1 } from "../import/import.js"
+import { express, multer } from "../import/import.js"
+import { storage1 } from "../services/file-handle.js";
+import { blogPage, createBlog, deleteBlog, editBlog, updateBlog, userBlog, viewBlog } from "../controllers/blog.js"
 
 const blogRouter = express.Router();
 

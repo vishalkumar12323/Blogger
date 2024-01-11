@@ -7,7 +7,7 @@ const setToken = (user) => {
         email: user.email,
         userProfile: user.userProfileImageURL
     }
-    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '5h' });
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5h' });
 
     return token;
 }
@@ -15,7 +15,7 @@ const setToken = (user) => {
 const getToken = (token) => {
     if (!token) return null;
     try {
-        return jwt.verify(token, process.env.SECRET);
+        return jwt.verify(token, process.env.JWT_SECRET);
     } catch (e) {
         return null;
     }

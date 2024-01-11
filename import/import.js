@@ -1,26 +1,24 @@
-import express from "express";
 import path from "path";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import jwt from "jsonwebtoken";
-import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import multer from "multer";
+import express from "express";
+import jwt from "jsonwebtoken";
 import passport from "passport";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
 import session from "express-session";
-import GoogleStrategy from "passport-google-oidc";
+import cookieParser from "cookie-parser";
+import findOrCreate from "mongoose-findorcreate";
 import { Home } from "../controllers/home.js";
-import { blogPage, createBlog, deleteBlog, editBlog, updateBlog, userBlog, viewBlog } from "../controllers/blog.js";
-import { Logout, getLoginPage, getSigninPage, login, signin } from "../controllers/user.js";
-import { connectDB } from "../db/connection.js"
-import { authentication, checkUserAuth } from "../middlewares/authentication.js";
-import { getToken, setToken } from "../middlewares/token-services.js"
 import { Blog } from "../models/blogSchema.js";
 import { User } from "../models/userSchema.js";
-import { blogRouter } from "../routes/blog-router.js";
+import { connectDB } from "../db/connection.js";
+import GoogleStrategy from "passport-google-oauth20";
 import { router } from "../routes/user-router.js";
-import { storage1, storage2 } from "../services/file-handle.js"
+import { blogRouter } from "../routes/blog-router.js";
+import { getToken, setToken } from "../middlewares/token-services.js";
+import { authentication, checkUserAuth } from "../middlewares/authentication.js";
 
 
 
-export { express, mongoose, path, multer, cookieParser, session, passport, GoogleStrategy, bodyParser, Blog, Home, User, blogPage, Logout, authentication, bcrypt, router, getToken, setToken, checkUserAuth, connectDB, getLoginPage, getSigninPage, login, signin, blogRouter, createBlog, deleteBlog, editBlog, updateBlog, userBlog, viewBlog, jwt, storage1, storage2 };
+export { express, multer, cookieParser, session, Home, authentication, getToken, setToken, checkUserAuth, connectDB, findOrCreate, mongoose, path, GoogleStrategy, jwt, bcrypt, bodyParser, passport, Blog, User, router, blogRouter, };
