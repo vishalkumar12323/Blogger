@@ -1,14 +1,7 @@
-import { config } from "dotenv";
+import { config } from "dotenv"
 config();
-import path from "path";
-import express from "express";
-import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import { Home } from "./controllers/home.js";
-import { connectDB } from "./db/connection.js";
-import { router } from "./routes/user-router.js";
-import { blogRouter } from "./routes/blog-router.js";
-import { authentication, checkUserAuth } from "./middlewares/authentication.js";
+import { express, bodyParser, path, cookieParser, Home, connectDB, router, blogRouter, authentication, checkUserAuth } from "./import/import.js"
+
 
 // setting express app.
 const app = express();

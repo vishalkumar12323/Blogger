@@ -1,13 +1,6 @@
-import { Router } from "express";
-import multer from "multer";
-import { storage1 } from "../services/file-handle.js";
-import {
-    blogPage, createBlog,
-    editBlog, updateBlog,
-    viewBlog, deleteBlog, userBlog
-} from "../controllers/blog.js"
-const blogRouter = Router();
+import { express, multer, blogPage, createBlog, userBlog, viewBlog, editBlog, updateBlog, deleteBlog, storage1 } from "../import/import.js"
 
+const blogRouter = express.Router();
 
 const uploads = multer({ storage: storage1 });
 

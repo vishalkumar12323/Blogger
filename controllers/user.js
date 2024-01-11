@@ -1,5 +1,4 @@
-import { User } from "../models/userSchema.js";
-import { setToken } from "../middlewares/token-services.js"
+import { User, setToken } from "../import/import.js"
 
 const getSigninPage = (req, res) => {
     res.render("signin");

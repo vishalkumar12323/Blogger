@@ -1,4 +1,2 @@
-import passport from "passport";
-import GoogleStrategy from "passport-google-oidc";
+import { session, passport, GoogleStrategy } from "../import/import.js";
 GoogleStrategy.Strategy;
-import session from "express-session";

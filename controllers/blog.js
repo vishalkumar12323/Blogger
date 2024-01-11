@@ -1,5 +1,4 @@
-import { Blog } from "../models/blogSchema.js";
-import { User } from "../models/userSchema.js";
+import { User, Blog } from "../import/import.js"
 
 const blogPage = (req, res) => {
     res.render("new-blog");

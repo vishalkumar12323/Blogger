@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import { jwt } from "../import/import.js";
 
 const setToken = (user) => {
     const payload = {

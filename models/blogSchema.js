@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+import { mongoose } from "../import/import.js";
 
-const blogSchema = new Schema({
+const blogSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -19,6 +19,6 @@ const blogSchema = new Schema({
     }
 }, { timestamps: true });
 
-const Blog = new model('blog', blogSchema);
+const Blog = new mongoose.model('blog', blogSchema);
 
 export { Blog };

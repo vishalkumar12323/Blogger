@@ -1,8 +1,5 @@
-import { Router } from "express";
-import multer from "multer";
-import { Logout, getLoginPage, getSigninPage, login, signin } from "../controllers/user.js"
-import { storage2 } from "../services/file-handle.js";
-const router = Router();
+import { express, multer, getSigninPage, signin, getLoginPage, login, Logout, storage2 } from "../import/import.js"
+const router = express.Router();
 
 const upload = multer({ storage: storage2 });
 

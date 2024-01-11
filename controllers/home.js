@@ -1,4 +1,4 @@
-import { Blog } from "../models/blogSchema.js"
+import { Blog } from "../import/import.js";
 
 const Home = async (req, res) => {
     const blogs = await Blog.find().limit(9);

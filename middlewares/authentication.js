@@ -1,4 +1,4 @@
-import { getToken } from "./token-services.js"
+import { getToken } from "../import/import.js"
 
 const authentication = async (req, res, next) => {
     req.user = null;
