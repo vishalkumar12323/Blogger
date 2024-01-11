@@ -1,6 +1,6 @@
 import { config } from "dotenv"
 config();
-import { session, passport, express, bodyParser, path, cookieParser, Home, connectDB, router, blogRouter, authentication, checkUserAuth } from "./import/import.js"
+import { session, passport, express, bodyParser, path, cookieParser, Home, connectDB, router, blogRouter } from "./import/import.js"
 import { auth2_O } from "./services/auth2.0.js"
 
 // setting express app.
@@ -37,11 +37,11 @@ app.get('/auth/google/user-blog',
         // Successful authentication, redirect home.
         res.redirect('/');
     });
-app.get('/', checkUserAuth, Home)
+app.get('/', Home)
 // User Routes
 app.use('/user', router);
 // Blog Routes
-app.use("/blog", authentication, blogRouter);
+app.use("/blog", blogRouter);
 
 // connecting mongodb.
 connectDB(process.env.LOCAL_URL).then(() => console.log('connect'));

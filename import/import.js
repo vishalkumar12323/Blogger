@@ -1,8 +1,6 @@
 import path from "path";
-import bcrypt from "bcrypt";
 import multer from "multer";
 import express from "express";
-import jwt from "jsonwebtoken";
 import passport from "passport";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
@@ -16,9 +14,7 @@ import { connectDB } from "../db/connection.js";
 import GoogleStrategy from "passport-google-oauth20";
 import { router } from "../routes/user-router.js";
 import { blogRouter } from "../routes/blog-router.js";
-import { getToken, setToken } from "../middlewares/token-services.js";
-import { authentication, checkUserAuth } from "../middlewares/authentication.js";
 
 
 
-export { express, multer, cookieParser, session, Home, authentication, getToken, setToken, checkUserAuth, connectDB, findOrCreate, mongoose, path, GoogleStrategy, jwt, bcrypt, bodyParser, passport, Blog, User, router, blogRouter, };
+export { express, multer, cookieParser, session, Home, connectDB, findOrCreate, mongoose, path, GoogleStrategy, bodyParser, passport, Blog, User, router, blogRouter, };

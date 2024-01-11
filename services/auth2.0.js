@@ -19,8 +19,7 @@ const auth2_O = () => {
             callbackURL: 'http://localhost:8080/auth/google/user-blog',
         },
         function (accessToken, refreshToken, profile, cb) {
-            console.log(profile);
-            User.findOrCreate({ googleId: profile.id }, (err, user) => {
+            User.findOrCreate({ googleId: profile.id, name: profile.displayName, userProfileImageURL: profile.photos[0].value }, (err, user) => {
                 return cb(err, user);
             })
         }
