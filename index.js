@@ -1,29 +1,48 @@
-import { config } from "dotenv"
-config();
-import { GoogleStrategy, User, session, passport, express, bodyParser, path, connectDB } from "./import/import.js"
+import express from "express";
+import bodyParser from "body-parser";
+import session from "express-session";
+import passport from "passport";
+import path from "path";
 import multer from "multer";
+import { config } from "dotenv";
+import GoogleStrategy from "passport-google-oauth20"
+import { connectDB } from "./db/connection.js";
+import { User } from "./models/userSchema.js";
 import { storage2 } from "./services/file-handle.js";
-GoogleStrategy.Strategy;
-// setting express app.
 
+// Load environment variables
+config();
+
+// Configure Google strategy
+GoogleStrategy.Strategy;
+
+// Set up Express app
 const app = express();
 const port = 8080;
+
+// Configure multer for file uploads
 const upload = multer({ storage: storage2 });
+
+// Middleware
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Set view engine and views path
 app.set('view engine', 'ejs');
-app.set('ejs', path.resolve('./views'));
+app.set('views', path.resolve('./views'));
 
+// Configure session
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
 }));
 
+// Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Configure passport
 passport.use(User.createStrategy());
 
 passport.serializeUser((user, done) => {
@@ -34,7 +53,7 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-
+// Routes
 app.get('/', (req, res) => {
     res.render('home', { user: req.user });
 });
@@ -57,7 +76,11 @@ app.get('/new-blog', (req, res) => {
 
 app.post('/signup', upload.single('profileImage'), (req, res) => {
     User.register(
-        { username: req.body.username, name: req.body.name, userProfileImageURL: `uploads/user/${req.file.filename}` },
+        {
+            username: req.body.username,
+            name: req.body.name,
+            userProfileImageURL: `uploads/user/${req.file.filename}`
+        },
         req.body.password,
         (err, user) => {
             if (err) {
@@ -65,9 +88,10 @@ app.post('/signup', upload.single('profileImage'), (req, res) => {
             } else {
                 passport.authenticate("local")(req, res, () => {
                     res.redirect('/');
-                })
+                });
             }
-        });
+        }
+    );
 });
 
 app.post('/login', (req, res) => {
@@ -95,8 +119,11 @@ app.get('/logout', (req, res) => {
         } else {
             res.redirect('/login');
         }
-    })
+    });
 });
 
-connectDB(process.env.LOCAL_URL).then(() => console.log('connect'));
-app.listen(port, () => console.log(`start on port: ${port}`));
+// Connect to the database
+connectDB(process.env.LOCAL_URL).then(() => console.log('Connected to the database'));
+
+// Start the server
+app.listen(port, () => console.log(`Server started on port: ${port}`));

@@ -1,4 +1,5 @@
-import { mongoose, findOrCreate } from "../import/import.js";
+import mongoose from "mongoose";
+import findOrCreate from "mongoose-findorcreate";
 import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
