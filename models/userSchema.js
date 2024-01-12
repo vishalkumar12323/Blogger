@@ -2,10 +2,10 @@ import { mongoose, findOrCreate } from "../import/import.js";
 import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
-    username: {
+    name: {
         type: String,
     },
-    email: {
+    username: {
         type: String,
         unique: true,
     },

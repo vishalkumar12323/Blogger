@@ -12,9 +12,8 @@ import { Blog } from "../models/blogSchema.js";
 import { User } from "../models/userSchema.js";
 import { connectDB } from "../db/connection.js";
 import GoogleStrategy from "passport-google-oauth20";
-import { router } from "../routes/user-router.js";
 import { blogRouter } from "../routes/blog-router.js";
 
 
 
-export { express, multer, cookieParser, session, Home, connectDB, findOrCreate, mongoose, path, GoogleStrategy, bodyParser, passport, Blog, User, router, blogRouter, };
+export { express, multer, cookieParser, session, Home, connectDB, findOrCreate, mongoose, path, GoogleStrategy, bodyParser, passport, Blog, User, blogRouter, };

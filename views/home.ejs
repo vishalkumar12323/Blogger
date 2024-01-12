@@ -1,26 +1,9 @@
 <%- include('./partials/header') %> <%- include('./partials/navbar') %>
 <div class="container mt-5">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-    <% if (locals.user) { %> <% locals.blogs.forEach(blog => { %>
-    <div class="col">
-      <div class="card shadow-sm">
-        <img src="<%= blog.coverImage %>" alt="blog images" class="img-fluid" />
-        <div class="card-body">
-          <p class="card-title fs-5 fw-bold">
-            <%= blog.title.slice(0, 45) %>...
-          </p>
-          <p class="card-text"><%= blog.content.slice(0, 60) %></p>
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">
-              <a href="/blog/<%= blog._id %>" class="nav-link"
-                >Continue reading...</a
-              >
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <% }) %> <% } else{%>
+    <% if (locals.user) { %>
+    <h1><%= user.username %></h1>
+    <% } else{%>
     <div class="container" style="width: 100%; margin: 1rem auto">
       <div class="p-5 text-center shadow rounded-3">
         <img
