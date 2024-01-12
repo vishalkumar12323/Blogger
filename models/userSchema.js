@@ -2,28 +2,30 @@ import mongoose from "mongoose";
 import findOrCreate from "mongoose-findorcreate";
 import passportLocalMongoose from "passport-local-mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
+      type: String,
     },
     username: {
-        type: String,
-        unique: true,
+      type: String,
+      sparse: true,
+      unique: true,
+      index: true,
     },
     password: {
-        type: String,
+      type: String,
     },
     userProfileImageURL: {
-        type: String,
-        default: '/uploads/user-profile.svg'
+      type: String,
+      default: "/uploads/user-profile.svg",
     },
-    googleId: {
-        type: String,
-    }
-}, { timestamps: true });
+  },
+  { timestamps: true }
+);
 
-userSchema.plugin(passportLocalMongoose)
+userSchema.plugin(passportLocalMongoose);
 userSchema.plugin(findOrCreate);
-const User = new mongoose.model('user', userSchema);
+const User = new mongoose.model("user", userSchema);
 
 export { User };
