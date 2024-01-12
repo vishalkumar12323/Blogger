@@ -1,29 +1,28 @@
 import { config } from "dotenv"
 config();
-import { GoogleStrategy, User, session, passport, express, bodyParser, path, cookieParser, connectDB, blogRouter } from "./import/import.js"
+import { GoogleStrategy, User, session, passport, express, bodyParser, path, connectDB } from "./import/import.js"
+import multer from "multer";
+import { storage2 } from "./services/file-handle.js";
 GoogleStrategy.Strategy;
 // setting express app.
+
 const app = express();
-const port = process.env.PORT || 8080;
-
-// setting view engine templates.
-app.set("view engine", 'ejs');
-app.set('ejs', path.resolve("./views"));
-
-// setting middleware
-app.use(express.static("public"));
+const port = 8080;
+const upload = multer({ storage: storage2 });
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+
+app.set('view engine', 'ejs');
+app.set('ejs', path.resolve('./views'));
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: false
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-connectDB(process.env.LOCAL_URL).then(() => console.log('connect'));
 
 passport.use(User.createStrategy());
 
@@ -35,29 +34,6 @@ passport.deserializeUser((user, done) => {
     done(null, user);
 });
 
-passport.use(new GoogleStrategy(
-    {
-        clientID: process.env.CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: 'http://localhost:8080/auth/google/user-blog',
-    },
-    function (accessToken, refreshToken, profile, cb) {
-        User.findOrCreate({ googleId: profile.id, name: profile.displayName, userProfileImageURL: profile.photos[0].value }, (err, user) => {
-            return cb(err, user);
-        })
-    }
-))
-
-app.get('/auth/google',
-    passport.authenticate('google', { scope: ['profile'] }));
-
-app.get('/auth/google/user-blog',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function (req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
-    }
-);
 
 app.get('/', (req, res) => {
     res.render('home', { user: req.user });
@@ -69,31 +45,58 @@ app.get('/signup', (req, res) => {
 
 app.get('/login', (req, res) => {
     res.render('login');
-})
+});
 
-app.post('/signup', (req, res) => {
+app.get('/new-blog', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render('new-blog');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+app.post('/signup', upload.single('profileImage'), (req, res) => {
     User.register(
-        { username: req.body.username, name: req.body.name },
+        { username: req.body.username, name: req.body.name, userProfileImageURL: `uploads/user/${req.file.filename}` },
         req.body.password,
         (err, user) => {
             if (err) {
-                console.log('Registeration error', err);
-                res.redirect('/signup');
+                console.log(err);
             } else {
-                console.log(user);
-                passport.authenticate('local')(req, res, () => {
+                passport.authenticate("local")(req, res, () => {
                     res.redirect('/');
-                });
+                })
             }
         });
 });
 
 app.post('/login', (req, res) => {
-
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+    req.login(user, (err) => {
+        if (err) {
+            console.log('login error', err);
+            res.redirect('login');
+        } else {
+            passport.authenticate('local')(req, res, () => {
+                res.redirect('/');
+            });
+        }
+    });
 });
 
 app.get('/logout', (req, res) => {
-
+    req.logout((err) => {
+        if (err) {
+            console.log('logout error', err);
+            res.redirect('/');
+        } else {
+            res.redirect('/login');
+        }
+    })
 });
 
-app.listen(port, () => console.log(`server running on port:${port}`));
+connectDB(process.env.LOCAL_URL).then(() => console.log('connect'));
+app.listen(port, () => console.log(`start on port: ${port}`));
