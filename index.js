@@ -63,26 +63,18 @@ passport.use(
       callbackURL: "http://localhost:8080/auth/google/user-blog",
     },
     (accessToken, refreshToken, profile, cb) => {
-      User.findOne({ googleId: profile.id }, function (err, foundUser) {
-        if (!err) {
-          if (foundUser) {
-            return cb(null, foundUser);
-          } else {
-            const newUser = new User({
-              username: profile.emails[0].value,
-              userProfileImageURL: photos[0].value,
-              name: profile.displayName,
-            });
-            newUser.save(function (err) {
-              if (!err) {
-                return cb(null, newUser);
-              }
-            });
-          }
-        } else {
-          console.log(err);
+      // console.log(accessToken);
+      User.findOrCreate(
+        {
+          username: profile.id,
+          name: profile.displayName,
+          email: profile.emails[0].value,
+          userProfileImageURL: profile.photos[0].value,
+        },
+        (err, user) => {
+          return cb(err, user);
         }
-      });
+      );
     }
   )
 );
@@ -125,7 +117,8 @@ app.get("/new-blog", (req, res) => {
 app.post("/signup", upload.single("profileImage"), (req, res) => {
   User.register(
     {
-      username: req.body.username,
+      username: req.body.email,
+      email: req.body.email,
       name: req.body.name,
       userProfileImageURL: `uploads/user/${req.file.filename}`,
     },
@@ -144,7 +137,7 @@ app.post("/signup", upload.single("profileImage"), (req, res) => {
 
 app.post("/login", (req, res) => {
   const user = new User({
-    username: req.body.username,
+    username: req.body.email,
     password: req.body.password,
   });
   req.login(user, (err) => {

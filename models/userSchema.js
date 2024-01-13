@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema(
     },
     username: {
       type: String,
+    },
+    email: {
+      type: String,
       sparse: true,
       unique: true,
       index: true,
@@ -24,7 +27,9 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose, {
+  usernameField: "email",
+});
 userSchema.plugin(findOrCreate);
 const User = new mongoose.model("user", userSchema);
 
