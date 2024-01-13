@@ -1,20 +1,17 @@
 import express from "express";
 import bodyParser from "body-parser";
-import session from "express-session";
-import passport from "passport";
 import path from "path";
 import multer from "multer";
 import { config } from "dotenv";
-import GoogleStrategy from "passport-google-oauth20";
+import passport from "passport";
+import session from "express-session";
+import { authenticate } from "./services/authentication.js";
 import { connectDB } from "./db/connection.js";
 import { User } from "./models/userSchema.js";
 import { storage2 } from "./services/file-handle.js";
 
 // Load environment variables
 config();
-
-// Configure Google strategy
-GoogleStrategy.Strategy;
 
 // Set up Express app
 const app = express();
@@ -43,41 +40,7 @@ app.use(
 // Initialize passport
 app.use(passport.initialize());
 app.use(passport.session());
-
-// Configure passport
-passport.use(User.createStrategy());
-
-passport.serializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-});
-
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/auth/google/user-blog",
-    },
-    (accessToken, refreshToken, profile, cb) => {
-      // console.log(accessToken);
-      User.findOrCreate(
-        {
-          username: profile.id,
-          name: profile.displayName,
-          email: profile.emails[0].value,
-          userProfileImageURL: profile.photos[0].value,
-        },
-        (err, user) => {
-          return cb(err, user);
-        }
-      );
-    }
-  )
-);
+authenticate();
 
 // Routes
 app.get(
