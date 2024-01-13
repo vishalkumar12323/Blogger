@@ -4,9 +4,11 @@ import bodyParser from "body-parser";
 import path from "path";
 import { config } from "dotenv";
 import passport from "passport";
-import { authenticate } from "./services/authentication.js";
 import { connectDB } from "./db/connection.js";
 import { router } from "./routes/user.js";
+import { blog } from "./routes/blog.js";
+import { Blog } from "./models/blogSchema.js";
+import { authenticate } from "./services/authentication.js";
 
 // Load environment variables
 config();
@@ -39,17 +41,12 @@ authenticate();
 
 // Routes
 app.use("/", router);
-app.get("/", (req, res) => {
-  res.render("home", { user: req.user });
+app.get("/", async (req, res) => {
+  const blogs = await Blog.find({ createdBy: { $ne: null } });
+  res.render("home", { user: req.user, blogs: blogs });
 });
+app.use("/blog", blog);
 
-app.get("/new-blog", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.render("new-blog");
-  } else {
-    res.redirect("/login");
-  }
-});
 // Connect to the database
 connectDB(process.env.LOCAL_URL).then(() =>
   console.log("Connected to the database")
