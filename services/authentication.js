@@ -1,5 +1,4 @@
 import passport from "passport";
-
 import GoogleStrategy from "passport-google-oauth20";
 import express from "express";
 import { User } from "../models/userSchema.js";

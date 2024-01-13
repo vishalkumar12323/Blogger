@@ -1,7 +1,13 @@
 import express from "express";
+import passport from "passport";
+import multer from "multer";
 import { User } from "../models/userSchema.js";
+import { storage2 } from "../services/file-handle.js";
 
 const router = express.Router();
+
+// Configure multer for file uploads
+const upload = multer({ storage: storage2 });
 
 router.get(
   "/auth/google",

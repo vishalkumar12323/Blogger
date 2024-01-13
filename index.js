@@ -1,14 +1,12 @@
 import express from "express";
+import session from "express-session";
 import bodyParser from "body-parser";
 import path from "path";
-import multer from "multer";
 import { config } from "dotenv";
 import passport from "passport";
-import session from "express-session";
 import { authenticate } from "./services/authentication.js";
 import { connectDB } from "./db/connection.js";
 import { router } from "./routes/user.js";
-import { storage2 } from "./services/file-handle.js";
 
 // Load environment variables
 config();
@@ -16,9 +14,6 @@ config();
 // Set up Express app
 const app = express();
 const port = 8080;
-
-// Configure multer for file uploads
-const upload = multer({ storage: storage2 });
 
 // Middleware
 app.use(express.static("public"));
@@ -43,7 +38,6 @@ app.use(passport.session());
 authenticate();
 
 // Routes
-
 app.use("/", router);
 app.get("/", (req, res) => {
   res.render("home", { user: req.user });
