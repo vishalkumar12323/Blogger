@@ -48,7 +48,7 @@ app.get("/", async (req, res) => {
 app.use("/blog", blog);
 
 // Connect to the database
-connectDB(process.env.LOCAL_URL).then(() =>
+connectDB(process.env.CONNECTION_STRING).then(() =>
   console.log("Connected to the database")
 );
 
