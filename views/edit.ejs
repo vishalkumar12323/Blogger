@@ -2,7 +2,7 @@
 
 <div class="container mt-5 border p-4 rounded box shadow">
   <form
-    action="/blog/edit/<%= id %>"
+    action="/blog/update/<%=blog.id %>"
     method="post"
     enctype="multipart/form-data"
   >
@@ -13,18 +13,12 @@
         class="form-control"
         id="file"
         name="coverImage"
-        required
+        required="false"
       />
     </div>
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input
-        type="text"
-        class="form-control"
-        id="title"
-        name="title"
-        required
-      />
+      <input type="text" class="form-control" id="title" name="title" />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
@@ -33,7 +27,6 @@
         id="content"
         rows="5"
         name="content"
-        required
       ></textarea>
     </div>
     <div>
