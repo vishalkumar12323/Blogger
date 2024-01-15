@@ -43,7 +43,7 @@ authenticate();
 app.use("/", router);
 app.get("/", async (req, res) => {
   const blogs = await Blog.find({ createdBy: { $ne: null } });
-  res.render("home", { user: req.user, blogs: blogs });
+  res.render("index", { user: req.user, blogs: blogs });
 });
 app.use("/blog", blog);
 
