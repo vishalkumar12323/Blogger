@@ -25,8 +25,25 @@
         <li class="nav-item">
           <a class="nav-link text-white" href="/blog/new">Create Blog</a>
         </li>
-
-        <li class="nav-item dropdown">
+      </ul>
+      <ul
+        class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1 d-flex justify-content-center align-item-center"
+      >
+        <li
+          class="nav-item d-flex justify-content-center align-item-center mx-2 mt-1"
+          style="width: 45px; height: 45px"
+        >
+          <img
+            src="<%= locals.user ? user.userProfileImageURL : '/assets/user-profile.svg' %>"
+            class="img-fluid"
+            style="border-radius: 50%"
+            alt="user-profile-img"
+          />
+        </li>
+        <li
+          class="nav-item dropdown d-flex align-item-center"
+          style="padding-right: 30px"
+        >
           <a
             class="nav-link dropdown-toggle text-white"
             href="#"
@@ -46,19 +63,6 @@
             <li><a class="dropdown-item" href="/login">Login</a></li>
             <% } %>
           </ul>
-        </li>
-      </ul>
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
-        <li
-          class="nav-item d-flex justify-content-center align-item-center mx-2 mt-1"
-          style="width: 38px; height: 38px"
-        >
-          <img
-            src="<%= locals.user ? user.userProfileImageURL : '/assets/user-profile.svg' %>"
-            class="img-fluid"
-            style="border-radius: 50%"
-            alt="user-profile-img"
-          />
         </li>
       </ul>
     </div>

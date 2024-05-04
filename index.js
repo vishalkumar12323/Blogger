@@ -48,7 +48,7 @@ app.get("/", async (req, res) => {
 app.use("/blog", blog);
 
 // Connect to the database
-connectDB(process.env.CONNECTION_STRING).then(() =>
+connectDB("mongodb://127.0.0.1:27017/Blogger").then(() =>
   console.log("Connected to the database")
 );
 
