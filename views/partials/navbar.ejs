@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-dark">
-  <div class="container-fluid nav">
+<nav class="navbar navbar-expand-lg bg-primary">
+  <div class="container nav px-4 px-lg-0">
     <div class="nav-heading">
       <a class="navbar-brand text-white" href="/">Blogger</a>
     </div>
@@ -23,7 +23,7 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white" href="/blog/new">Create Blog</a>
+          <a class="nav-link text-white" href="/new">Create Blog</a>
         </li>
       </ul>
       <ul
@@ -34,16 +34,13 @@
           style="width: 45px; height: 45px"
         >
           <img
-            src="<%= locals.user ? user.userProfileImageURL : '/assets/user-profile.svg' %>"
-            class="img-fluid"
+            src="<%= locals.user && user.userProfileImageURL %>"
+            class="img-fluid <%= locals.user ? 'd-block' : 'd-none' %>"
             style="border-radius: 50%"
             alt="user-profile-img"
           />
         </li>
-        <li
-          class="nav-item dropdown d-flex align-item-center"
-          style="padding-right: 30px"
-        >
+        <li class="nav-item dropdown d-flex align-item-center">
           <a
             class="nav-link dropdown-toggle text-white"
             href="#"

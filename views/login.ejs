@@ -4,9 +4,6 @@
   <div
     class="d-flex flex-center align-items-center flex-column flex-column-fluid pb-5"
   >
-    <a href="#" class="mb-4">
-      <img alt="Logo" src="/assets/blogger.png" class="img-fluid" width="50" />
-    </a>
     <div class="signin-container bg-white rounded shadow px-3 py-3 mx-auto">
       <form
         class="form w-100"
@@ -45,6 +42,7 @@
             autocomplete="off"
             name="password"
             class="form-control form-control-lg form-control-solid"
+            placeholder="Password"
           />
         </div>
         <div class="text-center">
@@ -66,44 +64,11 @@
               src="/assets/google.svg"
               class="h-20px me-3"
             />Continue with Google</a
-          ><a
-            href="#"
-            class="btn btn-flex flex-center btn-light btn-lg w-100 mb-3"
-            ><img
-              alt="Logo"
-              src="/assets/facebook.svg"
-              class="h-20px me-3"
-            />Continue with Facebook</a
           >
         </div>
       </form>
     </div>
   </div>
+
+  <%- include('./partials/footer') %>
 </div>
-<!-- <div class="container mt-5 border p-3 rounded shadow">
-  <form action="/login" method="post">
-    <div class="mb-3">
-      <label for="email" class="form-label">Email address</label>
-      <input
-        type="email"
-        name="email"
-        class="form-control"
-        id="email"
-        placeholder="Enter email"
-        aria-describedby="email"
-      />
-    </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        name="password"
-        class="form-control"
-        id="password"
-        placeholder="Enter password"
-      />
-    </div>
-    <button type="submit" class="btn btn-outline-primary">Login</button>
-  </form>
-</div> -->
-<%- include('./partials/footer') %>
