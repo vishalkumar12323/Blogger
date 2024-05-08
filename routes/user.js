@@ -37,7 +37,7 @@ router.post("/signup", upload.single("profileImage"), (req, res) => {
       username: req.body.email,
       email: req.body.email,
       name: req.body.name,
-      userProfileImageURL: `uploads/user/${req.file.filename}`,
+      userProfileImageURL: `uploads/users/${req.file.filename}`,
     },
     req.body.password,
     (err, user) => {

@@ -3,7 +3,7 @@ import { Blog } from "../models/blogSchema.js";
 // show create blog page.
 const newBlog = (req, res) => {
   if (req.isAuthenticated()) {
-    res.render("new");
+    res.render("new", { user: req.user });
   } else {
     res.redirect("/login");
   }
@@ -12,7 +12,7 @@ const newBlog = (req, res) => {
 const viewUpdatedBlog = async (req, res) => {
   const id = req.params.id;
   const blog = await Blog.findById({ _id: id });
-  res.render("edit", { blog: blog });
+  res.render("edit", { blog: blog, user: req.user });
 };
 
 // create new blog post.
@@ -31,6 +31,7 @@ const postNewBlog = async (req, res) => {
       res.redirect("/");
     }
   } catch (e) {
+    console.log(e);
     res.redirect("/new");
   }
 };
@@ -70,7 +71,7 @@ const deleteBlog = async (req, res) => {
 
 // view full blog.
 const viewBlog = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   const blog = await Blog.findById({ _id: id });
   res.render("view", { blog: blog, user: req.user });
 };

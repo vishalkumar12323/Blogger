@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "/uploads/user-profile.svg",
     },
+    admin: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

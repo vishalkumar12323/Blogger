@@ -20,7 +20,7 @@ blog.route("/new").get(newBlog);
 blog.route("/new").post(upload.single("coverImage"), postNewBlog);
 
 blog
-  .route("/update/:id")
+  .route("/edit/:id")
   .get(viewUpdatedBlog)
   .post(upload.single("coverImage"), updateBlog);
 
