@@ -3,7 +3,6 @@ import session from "express-session";
 import bodyParser from "body-parser";
 import path from "path";
 import passport from "passport";
-import serverless from "serverless-http";
 import { config } from "dotenv";
 import { connectDB } from "./db/connection.js";
 import { router } from "./routes/user.js";
@@ -48,8 +47,6 @@ app.get("/", async (req, res) => {
 });
 app.use("/", blog);
 
-app.use("/.netlify/functions/app", router);
-
 // Connect to the database
 connectDB("mongodb://127.0.0.1:27017/Blogger").then(() =>
   console.log("Connected to the database")
@@ -57,6 +54,3 @@ connectDB("mongodb://127.0.0.1:27017/Blogger").then(() =>
 
 // Start the server
 app.listen(port, () => console.log(`Server started on port: ${port}`));
-
-// module.exports.handler = serverless(app);
-export const { handler } = serverless(app);
