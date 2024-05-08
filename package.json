@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "netlify deploy --prod",
+    "build": "npm run build",
     "start": "node function/index.js",
     "dev": "nodemon function/index"
   },
